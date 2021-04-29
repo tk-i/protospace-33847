@@ -24,9 +24,12 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-   unless user_signed_in?
-    redirect_to action: :index
-   end 
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+    unless current_user == @prototype.user
+      redirect_to root_path
+    end
   end
 
   def update
